@@ -1,0 +1,5 @@
+requests
+shodan
+dnspython
+beautifulsoup4
+python-whois
