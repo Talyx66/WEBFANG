@@ -26,18 +26,25 @@ parser.add_argument("--urlscan", action="store_true")
 args = parser.parse_args()
 
 target_type = detect_target_type(args.target)
+print(f"[DEBUG] Detected target type: {target_type}")
 
 if args.spider or target_type == "domain":
+    print("[*] Running spider module...")
     spider.run(args.target)
 if args.headers or target_type == "domain":
+    print("[*] Running headers module...")
     headers.run(args.target)
 if args.whois or target_type == "domain":
+    print("[*] Running whois_lookup module...")
     whois_lookup.run(args.target)
 if args.dns or target_type == "domain":
+    print("[*] Running dnsdumpster module...")
     dnsdumpster.run(args.target)
 if args.shodan or target_type == "domain" or target_type == "ip":
+    print("[*] Running shodan_lookup module...")
     shodan_lookup.run(args.target)
 if args.urlscan or target_type == "domain":
+    print("[*] Running urlscan module...")
     urlscan.run(args.target)
 if target_type == "email":
     print("[*] Detected email target")
