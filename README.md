@@ -14,7 +14,7 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 Features:
 -Web Spider
 -DNS & WHOIS Lookup
--Shodan & URLScan Integration
+-Shodan & URLScan Integration  (Get your API key from Shodan.io)
 -Header fingerprinting
 -Modular and extensible
 
