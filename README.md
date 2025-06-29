@@ -6,9 +6,9 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 
 ![screenshot 1](WEBFANG%20Screenshots/VirtualBoxVM_2TKZavLfFy.png)
 
-![screenshot 2](VirtualBoxVM_dT4sJlEYxo.png)
+![screenshot 2](WEBFANG%20Screenshots/VirtualBoxVM_dT4sJlEYxo.png)
 
-![screenshot 3](VirtualBoxVM_dT4sJlEYxo)
+![screenshot 3](WEBFANG%20Screenshots/VirtualBoxVM_dT4sJlEYxo)
 
 
 Features:
