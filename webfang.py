@@ -27,6 +27,18 @@ args = parser.parse_args()
 
 target_type = detect_target_type(args.target)
 
+if args.spider or target_type == "domain":
+    spider.run(args.target)
+if args.headers or target_type == "domain":
+    headers.run(args.target)
+if args.whois or target_type == "domain":
+    whois_lookup.run(args.target)
+if args.dns or target_type == "domain":
+    dnsdumpster.run(args.target)
+if args.shodan or target_type == "domain" or target_type == "ip":
+    shodan_lookup.run(args.target)
+if args.urlscan or target_type == "domain":
+    urlscan.run(args.target)
 if target_type == "email":
     print("[*] Detected email target")
     # Call your email-related modules here
