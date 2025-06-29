@@ -1,5 +1,5 @@
 WEBFANG
-My very first Command-line interface, please leave reviews, and Happy Hunting
+This is my very first Command-line interface tool created. Please leave reviews, and Happy Hunting
 
   
 **WebFang** is an OSINT + Reconnaissance toolkit for ethical hackers and red teamers.
