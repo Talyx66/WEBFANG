@@ -4,6 +4,13 @@ My very first Command-line interface, please leave reviews, and Happy Hunting
 **WebFang** is an OSINT + Reconnaissance toolkit for ethical hackers and red teamers.
 It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting.
 
+![screenshot 1](WEBFANG%20Screenshots/VirtualBoxVM_2TKZavLfFy.png)
+
+![screenshot 2](VirtualBoxVM_2TKZavLfFy)
+
+![screenshot 3](VirtualBoxVM_dT4sJlEYxo)
+
+
 Features:
 -Web Spider
 -DNS & WHOIS Lookup
