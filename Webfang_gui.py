@@ -1,0 +1,170 @@
+import sys
+import subprocess
+import time
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+    QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox
+)
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QFont, QTextCursor
+
+class WebFangGUI(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("WEBFANG by Talyx")
+        self.setGeometry(200, 200, 1000, 750)
+
+        self.central_widget = QWidget()
+        self.setCentralWidget(self.central_widget)
+
+        main_layout = QVBoxLayout()
+
+        # Neon glowing text logo
+        logo_label = QLabel("WEBFANG by Talyx")
+        logo_label.setObjectName("logoLabel")
+        logo_label.setAlignment(Qt.AlignCenter)
+        main_layout.addWidget(logo_label)
+
+        # Preset buttons for common actions
+        preset_layout = QHBoxLayout()
+        commands = {
+            "Scan URL": "-u https://example.com",
+            "Subdomains": "--subdomains https://example.com",
+            "DNS Bruteforce": "--dns-bruteforce https://example.com",
+            "Run All": "-a https://example.com"
+        }
+        for name, cmd in commands.items():
+            btn = QPushButton(name)
+            btn.clicked.connect(lambda _, c=cmd: self.input_field.setText(c))
+            preset_layout.addWidget(btn)
+        main_layout.addLayout(preset_layout)
+
+        # Input + Run + Save buttons
+        input_layout = QHBoxLayout()
+        self.input_field = QLineEdit()
+        self.input_field.setPlaceholderText("Enter WebFang arguments, e.g. -u https://target")
+        input_layout.addWidget(self.input_field)
+
+        self.run_button = QPushButton("Run")
+        self.run_button.clicked.connect(self.run_webfang)
+        input_layout.addWidget(self.run_button)
+
+        self.save_button = QPushButton("Save Output")
+        self.save_button.clicked.connect(self.save_output)
+        input_layout.addWidget(self.save_button)
+
+        main_layout.addLayout(input_layout)
+
+        # Output area
+        self.output_area = QTextEdit()
+        self.output_area.setReadOnly(True)
+        main_layout.addWidget(self.output_area)
+
+        # Footer with GitHub link (smaller)
+        footer = QLabel()
+        footer.setText(
+            'Made by Talyx  |  <span style="font-size:9pt;">'
+            '<a href="https://github.com/Talyx66" style="color:#00cfff; text-decoration:none;">github.com/Talyx66</a>'
+            '</span>'
+        )
+        footer.setAlignment(Qt.AlignCenter)
+        footer.setOpenExternalLinks(True)
+        footer.setStyleSheet("color: #aaaaaa; font-size: 10pt; padding: 6px;")
+        main_layout.addWidget(footer)
+
+        self.central_widget.setLayout(main_layout)
+
+    def run_webfang(self):
+        args = self.input_field.text().strip()
+        if not args:
+            self.output_area.append("[!] Please enter command arguments.\n")
+            return
+
+        self.output_area.append(f"\n>>> Running: python3 webfang.py {args}\n")
+        self.run_button.setText("Scanning...")
+        self.run_button.setEnabled(False)
+
+        QApplication.processEvents()
+        try:
+            result = subprocess.getoutput(f"python3 webfang.py {args}")
+        except Exception as e:
+            result = f"[ERROR] {str(e)}"
+
+        self.animate_output(result)
+
+        self.run_button.setText("Run")
+        self.run_button.setEnabled(True)
+
+    def animate_output(self, text):
+        self.output_area.moveCursor(QTextCursor.End)
+        for line in text.splitlines():
+            self.append_colored_line(line)
+            QApplication.processEvents()
+            time.sleep(0.01)
+
+    def append_colored_line(self, line):
+        if line.startswith("[+]"):
+            color = "#00ff88"
+        elif line.startswith("[-]"):
+            color = "#ff5555"
+        elif line.startswith("[!]"):
+            color = "#fce94f"
+        else:
+            color = "#eeeeee"
+        self.output_area.setTextColor(Qt.white)
+        self.output_area.setTextBackgroundColor(Qt.transparent)
+        self.output_area.append(f"<span style='color:{color}'>{line}</span>")
+
+    def save_output(self):
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Output", "webfang_output.txt", "Text Files (*.txt)")
+        if filename:
+            try:
+                with open(filename, 'w') as f:
+                    f.write(self.output_area.toPlainText())
+                QMessageBox.information(self, "Saved", f"Output saved to {filename}")
+            except Exception as e:
+                QMessageBox.warning(self, "Error", f"Failed to save: {e}")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyleSheet("""
+        QMainWindow {
+            background-color: qlineargradient(
+                spread:pad, x1:0, y1:0, x2:1, y2:1,
+                stop:0 #0a0f1c, stop:1 #001d2e
+            );
+        }
+        QWidget {
+            background-color: transparent;
+            color: #eeeeee;
+            font-family: Consolas, monospace;
+            font-size: 12pt;
+        }
+        QLabel#logoLabel {
+            color: #00cfff;
+            font-size: 54pt;
+            font-weight: bold;
+            font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
+        }
+        QPushButton {
+            background-color: #112233;
+            border: 1px solid #00cfff;
+            padding: 12px;
+            border-radius: 8px;
+            color: #00cfff;
+        }
+        QPushButton:hover {
+            background-color: #223344;
+        }
+        QLineEdit, QTextEdit {
+            background-color: #111a28;
+            border: 1px solid #00cfff;
+            border-radius: 6px;
+            padding: 8px;
+            color: #eeeeee;
+            font-size: 11pt;
+        }
+    """)
+    window = WebFangGUI()
+    window.show()
+    sys.exit(app.exec_())
