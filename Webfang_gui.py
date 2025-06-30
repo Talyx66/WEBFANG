@@ -1,3 +1,4 @@
+
 import sys
 import subprocess
 import time
@@ -5,13 +6,14 @@ from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox
 )
-from PyQt5.QtCore import Qt, QTimer
-from PyQt5.QtGui import QFont, QTextCursor
+from PyQt5.QtCore import Qt, QTimer, QUrl
+from PyQt5.QtGui import QFont, QTextCursor, QPixmap, QMovie
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
 
 class WebFangGUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("WEBFANG by Talyx")
+        self.setWindowTitle("WEBFANG")
         self.setGeometry(200, 200, 1000, 750)
 
         self.central_widget = QWidget()
@@ -20,10 +22,39 @@ class WebFangGUI(QMainWindow):
         main_layout = QVBoxLayout()
 
         # Neon glowing text logo
-        logo_label = QLabel("WEBFANG by Talyx")
+        logo_label = QLabel("WEBFANG by ")
         logo_label.setObjectName("logoLabel")
         logo_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(logo_label)
+
+        # Bat face background (slightly transparent)
+        bat_label = QLabel(self.central_widget)
+        bat_pixmap = QPixmap("bat_face.png")
+        bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        bat_label.setPixmap(bat_pixmap)
+        bat_label.setAlignment(Qt.AlignCenter)
+        bat_label.setStyleSheet("opacity: 0.2;")
+        bat_label.setAttribute(Qt.WA_TranslucentBackground)
+        main_layout.insertWidget(1, bat_label)  # Insert below logo_label but before buttons
+
+        # Matrix rain animations
+        left_matrix = QLabel(self.central_widget)
+        left_matrix_movie = QMovie("matrix_left.gif")
+        left_matrix.setMovie(left_matrix_movie)
+        left_matrix_movie.start()
+        left_matrix.setGeometry(0, 0, 100, 750)
+        left_matrix.setAttribute(Qt.WA_TranslucentBackground)
+        left_matrix.setStyleSheet("background: transparent;")
+        left_matrix.setParent(self.central_widget)
+
+        right_matrix = QLabel(self.central_widget)
+        right_matrix_movie = QMovie("matrix_right.gif")
+        right_matrix.setMovie(right_matrix_movie)
+        right_matrix_movie.start()
+        right_matrix.setGeometry(900, 0, 100, 750)
+        right_matrix.setAttribute(Qt.WA_TranslucentBackground)
+        right_matrix.setStyleSheet("background: transparent;")
+        right_matrix.setParent(self.central_widget)
 
         # Preset buttons for common actions
         preset_layout = QHBoxLayout()
@@ -46,6 +77,7 @@ class WebFangGUI(QMainWindow):
         input_layout.addWidget(self.input_field)
 
         self.run_button = QPushButton("Run")
+        self.run_button.clicked.connect(self.play_scan_sound)
         self.run_button.clicked.connect(self.run_webfang)
         input_layout.addWidget(self.run_button)
 
@@ -73,6 +105,18 @@ class WebFangGUI(QMainWindow):
         main_layout.addWidget(footer)
 
         self.central_widget.setLayout(main_layout)
+
+        # Ambient background loop audio
+        self.player = QMediaPlayer()
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matrix_loop.mp3")))
+        self.player.setVolume(10)
+        self.player.play()
+        self.player.mediaStatusChanged.connect(self.handle_media_status)
+
+        # Fang bite sound effect
+        self.fang_sound = QSoundEffect()
+        self.fang_sound.setSource(QUrl.fromLocalFile("fang_bite.wav"))
+        self.fang_sound.setVolume(0.6)
 
     def run_webfang(self):
         args = self.input_field.text().strip()
@@ -124,6 +168,14 @@ class WebFangGUI(QMainWindow):
                 QMessageBox.information(self, "Saved", f"Output saved to {filename}")
             except Exception as e:
                 QMessageBox.warning(self, "Error", f"Failed to save: {e}")
+
+    def play_scan_sound(self):
+        self.fang_sound.play()
+
+    def handle_media_status(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self.player.setPosition(0)
+            self.player.play()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
