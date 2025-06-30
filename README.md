@@ -1,7 +1,7 @@
 WEBFANG
 This is my very first Command-line interface tool created. Please leave reviews, and Happy Hunting
 
-**Open "webfang_gui.py" for graphical user interface mode.
+**Open "webfang_gui.py" for graphical user interface mode**
   
 **WebFang** is an OSINT + Reconnaissance toolkit for ethical hackers and red teamers.
 It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting.
