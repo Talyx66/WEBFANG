@@ -2,17 +2,13 @@
 import sys
 import subprocess
 import time
-import os
-
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox,
-    QGraphicsOpacityEffect
+    QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox
 )
 from PyQt5.QtCore import Qt, QTimer, QUrl
 from PyQt5.QtGui import QFont, QTextCursor, QPixmap, QMovie
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
-
 
 class WebFangGUI(QMainWindow):
     def __init__(self):
@@ -25,64 +21,42 @@ class WebFangGUI(QMainWindow):
 
         main_layout = QVBoxLayout()
 
-        # Neon glowing text logo
+        # Neon glowing text logo (top center)
         logo_label = QLabel("WEBFANG")
         logo_label.setObjectName("logoLabel")
         logo_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(logo_label)
 
-        # Bat face background (slightly transparent)
-        bat_label = QLabel()
-        bat_img_path = "2749.png"
-        if not os.path.isfile(bat_img_path):
-            print(f"[WARN] Bat image not found: {bat_img_path}")
-        bat_pixmap = QPixmap(bat_img_path)
+        # Bat face background (slightly transparent, below logo)
+        bat_label = QLabel(self.central_widget)
+        bat_pixmap = QPixmap("2749.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         bat_label.setPixmap(bat_pixmap)
         bat_label.setAlignment(Qt.AlignCenter)
+        bat_label.setStyleSheet("opacity: 0.2;")
+        bat_label.setAttribute(Qt.WA_TranslucentBackground)
+        main_layout.insertWidget(1, bat_label)  # Insert below logo
 
-        # Set opacity properly
-        opacity_effect = QGraphicsOpacityEffect()
-        opacity_effect.setOpacity(0.15)
-        bat_label.setGraphicsEffect(opacity_effect)
+        # Matrix rain animations on left and right sides
+        left_matrix = QLabel(self.central_widget)
+        left_matrix_movie = QMovie("matx.gif")
+        left_matrix.setMovie(left_matrix_movie)
+        left_matrix_movie.start()
+        left_matrix.setGeometry(0, 0, 100, 750)
+        left_matrix.setAttribute(Qt.WA_TranslucentBackground)
+        left_matrix.setStyleSheet("background: transparent;")
+        left_matrix.setParent(self.central_widget)
+        left_matrix.raise_()
 
-        main_layout.insertWidget(1, bat_label)  # Insert below logo_label
-
-        # Matrix rain animations on sides
-        matrix_left = QLabel()
-        matrix_left_path = "matri.gif"
-        if not os.path.isfile(matrix_left_path):
-            print(f"[WARN] Matrix GIF not found: {matrix_left_path}")
-        matrix_left_movie = QMovie(matrix_left_path)
-        matrix_left.setMovie(matrix_left_movie)
-        matrix_left_movie.start()
-        matrix_left.setFixedWidth(100)
-        matrix_left.setAttribute(Qt.WA_TranslucentBackground)
-        matrix_left.setStyleSheet("background: transparent;")
-        # Will add it to layout wrapper later
-
-        matrix_right = QLabel()
-        matrix_right_path = "matri.gif"
-        matrix_right_movie = QMovie(matrix_right_path)
-        matrix_right.setMovie(matrix_right_movie)
-        matrix_right_movie.start()
-        matrix_right.setFixedWidth(100)
-        matrix_right.setAttribute(Qt.WA_TranslucentBackground)
-        matrix_right.setStyleSheet("background: transparent;")
-
-        # Create a horizontal layout for side matrix + central content
-        central_layout = QHBoxLayout()
-        central_layout.addWidget(matrix_left)
-
-        # Middle widget will hold main_layout widgets (bat, logo, buttons, etc)
-        middle_widget = QWidget()
-        middle_widget.setLayout(main_layout)
-        central_layout.addWidget(middle_widget, stretch=1)
-
-        central_layout.addWidget(matrix_right)
-
-        # Now set central widget's layout to this horizontal layout
-        self.central_widget.setLayout(central_layout)
+        right_matrix = QLabel(self.central_widget)
+        right_matrix_movie = QMovie("matri.gif")
+        right_matrix.setMovie(right_matrix_movie)
+        right_matrix_movie.start()
+        right_matrix.setGeometry(900, 0, 100, 750)
+        right_matrix.setAttribute(Qt.WA_TranslucentBackground)
+        right_matrix.setStyleSheet("background: transparent;")
+        right_matrix.setParent(self.central_widget)
+        right_matrix.raise_()
 
         # Preset buttons for common actions
         preset_layout = QHBoxLayout()
@@ -132,22 +106,18 @@ class WebFangGUI(QMainWindow):
         footer.setStyleSheet("color: #aaaaaa; font-size: 10pt; padding: 6px;")
         main_layout.addWidget(footer)
 
+        self.central_widget.setLayout(main_layout)
+
         # Ambient background loop audio
-        bg_audio_path = "matx.mp3"
-        if not os.path.isfile(bg_audio_path):
-            print(f"[WARN] Background audio not found: {bg_audio_path}")
         self.player = QMediaPlayer()
-        self.player.setMedia(QMediaContent(QUrl.fromLocalFile(bg_audio_path)))
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
         self.player.setVolume(10)
         self.player.play()
         self.player.mediaStatusChanged.connect(self.handle_media_status)
 
         # Fang bite sound effect
-        fang_audio_path = "fang.wav"
-        if not os.path.isfile(fang_audio_path):
-            print(f"[WARN] Fang audio not found: {fang_audio_path}")
         self.fang_sound = QSoundEffect()
-        self.fang_sound.setSource(QUrl.fromLocalFile(fang_audio_path))
+        self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
 
     def run_webfang(self):
@@ -209,7 +179,6 @@ class WebFangGUI(QMainWindow):
             self.player.setPosition(0)
             self.player.play()
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet("""
@@ -253,3 +222,4 @@ if __name__ == "__main__":
     window = WebFangGUI()
     window.show()
     sys.exit(app.exec_())
+
