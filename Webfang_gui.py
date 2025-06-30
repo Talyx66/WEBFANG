@@ -29,7 +29,7 @@ class WebFangGUI(QMainWindow):
 
         # Bat face background (slightly transparent)
         bat_label = QLabel(self.central_widget)
-        bat_pixmap = QPixmap("bat_face.png")
+        bat_pixmap = QPixmap("2749.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         bat_label.setPixmap(bat_pixmap)
         bat_label.setAlignment(Qt.AlignCenter)
@@ -39,7 +39,7 @@ class WebFangGUI(QMainWindow):
 
         # Matrix rain animations
         left_matrix = QLabel(self.central_widget)
-        left_matrix_movie = QMovie("matrix_left.gif")
+        left_matrix_movie = QMovie("matx.gif")
         left_matrix.setMovie(left_matrix_movie)
         left_matrix_movie.start()
         left_matrix.setGeometry(0, 0, 100, 750)
@@ -48,7 +48,7 @@ class WebFangGUI(QMainWindow):
         left_matrix.setParent(self.central_widget)
 
         right_matrix = QLabel(self.central_widget)
-        right_matrix_movie = QMovie("matrix_right.gif")
+        right_matrix_movie = QMovie("matri.gif")
         right_matrix.setMovie(right_matrix_movie)
         right_matrix_movie.start()
         right_matrix.setGeometry(900, 0, 100, 750)
@@ -108,14 +108,14 @@ class WebFangGUI(QMainWindow):
 
         # Ambient background loop audio
         self.player = QMediaPlayer()
-        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matrix_loop.mp3")))
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
         self.player.setVolume(10)
         self.player.play()
         self.player.mediaStatusChanged.connect(self.handle_media_status)
 
         # Fang bite sound effect
         self.fang_sound = QSoundEffect()
-        self.fang_sound.setSource(QUrl.fromLocalFile("fang_bite.wav"))
+        self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
 
     def run_webfang(self):
