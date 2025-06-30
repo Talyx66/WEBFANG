@@ -1,5 +1,5 @@
 WEBFANG
-This is my very first Command-line interface tool created. Please leave reviews, and Happy Hunting
+This is my own very first Command-line interface tool created. Please leave reviews, and Happy Hunting
 
 **Open "webfang_gui.py" for graphical user interface mode**
   
