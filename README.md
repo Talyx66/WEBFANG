@@ -11,6 +11,8 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANG3.png)
 
+![screenshot 4](WEBFANG%20Screenshots/webfang11.png)
+
 Features:
 -Web Spider
 -DNS & WHOIS Lookup
