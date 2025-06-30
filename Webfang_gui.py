@@ -21,7 +21,7 @@ class WebFangGUI(QMainWindow):
 
         main_layout = QVBoxLayout()
 
-        # Neon glowing text logo
+        # Neon glowing text logo (you can adjust or remove 'by' text)
         logo_label = QLabel("WEBFANG by ")
         logo_label.setObjectName("logoLabel")
         logo_label.setAlignment(Qt.AlignCenter)
@@ -37,9 +37,9 @@ class WebFangGUI(QMainWindow):
         bat_label.setAttribute(Qt.WA_TranslucentBackground)
         main_layout.insertWidget(1, bat_label)  # Insert below logo_label but before buttons
 
-        # Matrix rain animations
+        # Matrix rain animations on left and right sides
         left_matrix = QLabel(self.central_widget)
-        left_matrix_movie = QMovie("matx.gif")
+        left_matrix_movie = QMovie("matri.gif")  # updated to matri.gif, adjust if needed
         left_matrix.setMovie(left_matrix_movie)
         left_matrix_movie.start()
         left_matrix.setGeometry(0, 0, 100, 750)
