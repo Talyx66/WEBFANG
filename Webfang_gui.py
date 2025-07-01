@@ -1,14 +1,15 @@
 import sys
 import subprocess
 import time
+import os
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox
 )
-from PyQt5.QtCore import Qt, QTimer, QUrl
-from PyQt5.QtGui import QFont, QTextCursor, QPixmap, QMovie
+from PyQt5.QtCore import Qt, QUrl, QTimer
+from PyQt5.QtGui import QTextCursor, QPixmap
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
-from PyQt5.QtMultimediaWidgets import QVideoWidget  # <-- added
+from PyQt5.QtMultimediaWidgets import QVideoWidget
 
 class WebFangGUI(QMainWindow):
     def __init__(self):
@@ -16,58 +17,40 @@ class WebFangGUI(QMainWindow):
         self.setWindowTitle("WEBFANG")
         self.setGeometry(200, 200, 1000, 750)
 
-        # Video background widget
+        # ==== VIDEO BACKGROUND ====
         self.video_widget = QVideoWidget(self)
         self.video_widget.setGeometry(0, 0, self.width(), self.height())
-        self.video_widget.lower()  # Send to back
+        self.video_widget.lower()
 
-        # Media player setup for video background
         self.video_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        video_path = "/home/silentadversary/WEBFANG/Talyxlogo6.mp4"  # Your mp4 video file
+        video_path = os.path.abspath("Talyxlogo6.mp4")
         self.video_player.setMedia(QMediaContent(QUrl.fromLocalFile(video_path)))
         self.video_player.setVideoOutput(self.video_widget)
         self.video_player.play()
-        self.video_player.mediaStatusChanged.connect(self.handle_video_loop)
+        self.video_player.mediaStatusChanged.connect(self.loop_video)
 
-        # Matrix rain animation label (above video)
-        self.matrix_label = QLabel(self)
-        self.matrix_movie = QMovie("/home/silentadversary/WEBFANG/matri.gif")
-        self.matrix_label.setMovie(self.matrix_movie)
-        self.matrix_movie.setCacheMode(QMovie.CacheAll)
-        self.matrix_movie.setSpeed(100)  # 100% speed
-        if self.matrix_movie.isValid():
-            self.matrix_movie.start()
-        else:
-            print("Matrix GIF is invalid or not found.")
-        self.matrix_label.setGeometry(0, 0, self.width(), self.height())
-        self.matrix_label.setScaledContents(True)
-        self.matrix_label.lower()  # Below central widget but above video
-        self.matrix_label.stackUnder(self.video_widget)  # just to be safe
-
-        # Central widget (transparent background)
-        self.central_widget = QWidget()
-        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 25);")
+        # ==== MAIN WIDGET ====
+        self.central_widget = QWidget(self)
+        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 80);")
         self.setCentralWidget(self.central_widget)
 
         main_layout = QVBoxLayout()
 
-        # Neon glowing text logo (top center)
+        # Logo Text
         logo_label = QLabel("WEBFANG")
-        logo_label.setObjectName("logoLabel")
         logo_label.setAlignment(Qt.AlignCenter)
+        logo_label.setObjectName("logoLabel")
         main_layout.addWidget(logo_label)
 
-        # Bat face image with transparency
-        bat_label = QLabel(self.central_widget)
+        # Bat image
+        bat_label = QLabel()
         bat_pixmap = QPixmap("2749.png")
-        bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-        bat_label.setPixmap(bat_pixmap)
+        bat_label.setPixmap(bat_pixmap.scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         bat_label.setAlignment(Qt.AlignCenter)
         bat_label.setStyleSheet("opacity: 0.2;")
-        bat_label.setAttribute(Qt.WA_TranslucentBackground)
-        main_layout.insertWidget(1, bat_label)
+        main_layout.addWidget(bat_label)
 
-        # Preset buttons for common actions
+        # Command buttons
         preset_layout = QHBoxLayout()
         commands = {
             "Scan URL": "-u https://example.com",
@@ -75,13 +58,13 @@ class WebFangGUI(QMainWindow):
             "DNS Bruteforce": "--dns-bruteforce https://example.com",
             "Run All": "-a https://example.com"
         }
-        for name, cmd in commands.items():
-            btn = QPushButton(name)
+        for label, cmd in commands.items():
+            btn = QPushButton(label)
             btn.clicked.connect(lambda _, c=cmd: self.input_field.setText(c))
             preset_layout.addWidget(btn)
         main_layout.addLayout(preset_layout)
 
-        # Input + Run + Save buttons
+        # Input + Run + Save
         input_layout = QHBoxLayout()
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Enter WebFang arguments, e.g. -u https://target")
@@ -98,42 +81,47 @@ class WebFangGUI(QMainWindow):
 
         main_layout.addLayout(input_layout)
 
-        # Output area
+        # Output
         self.output_area = QTextEdit()
         self.output_area.setReadOnly(True)
         main_layout.addWidget(self.output_area)
 
-        # Footer with GitHub link
+        # Footer
         footer = QLabel()
         footer.setText(
-            'Made by Talyx  |  <span style="font-size:9pt;">'
-            '<a href="https://github.com/Talyx66" style="color:#00cfff; text-decoration:none;">github.com/Talyx66</a>'
-            '</span>'
+            'Made by Talyx  |  <a href="https://github.com/Talyx66" style="color:#00cfff;">github.com/Talyx66</a>'
         )
         footer.setAlignment(Qt.AlignCenter)
         footer.setOpenExternalLinks(True)
-        footer.setStyleSheet("color: #aaaaaa; font-size: 10pt; padding: 6px;")
+        footer.setStyleSheet("color: #cccccc; font-size: 9pt;")
         main_layout.addWidget(footer)
 
         self.central_widget.setLayout(main_layout)
 
-        # Background audio player (mp3)
-        self.player = QMediaPlayer()
-        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
-        self.player.setVolume(10)
-        self.player.play()
-        self.player.mediaStatusChanged.connect(self.handle_media_status)
+        # ==== AUDIO ====
+        self.bg_audio = QMediaPlayer()
+        self.bg_audio.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
+        self.bg_audio.setVolume(10)
+        self.bg_audio.play()
+        self.bg_audio.mediaStatusChanged.connect(self.loop_audio)
 
-        # Scan sound effect
         self.fang_sound = QSoundEffect()
         self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
 
     def resizeEvent(self, event):
-        # Resize video widget and matrix label on window resize
         self.video_widget.setGeometry(0, 0, self.width(), self.height())
-        self.matrix_label.setGeometry(0, 0, self.width(), self.height())
-        super().resizeEvent(event)
+        return super().resizeEvent(event)
+
+    def loop_video(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self.video_player.setPosition(0)
+            self.video_player.play()
+
+    def loop_audio(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self.bg_audio.setPosition(0)
+            self.bg_audio.play()
 
     def run_webfang(self):
         args = self.input_field.text().strip()
@@ -144,15 +132,14 @@ class WebFangGUI(QMainWindow):
         self.output_area.append(f"\n>>> Running: python3 webfang.py {args}\n")
         self.run_button.setText("Scanning...")
         self.run_button.setEnabled(False)
-
         QApplication.processEvents()
+
         try:
             result = subprocess.getoutput(f"python3 webfang.py {args}")
         except Exception as e:
             result = f"[ERROR] {str(e)}"
 
         self.animate_output(result)
-
         self.run_button.setText("Run")
         self.run_button.setEnabled(True)
 
@@ -171,16 +158,14 @@ class WebFangGUI(QMainWindow):
         elif line.startswith("[!]"):
             color = "#fce94f"
         else:
-            color = "#eeeeee"
-        self.output_area.setTextColor(Qt.white)
-        self.output_area.setTextBackgroundColor(Qt.transparent)
+            color = "#cccccc"
         self.output_area.append(f"<span style='color:{color}'>{line}</span>")
 
     def save_output(self):
         filename, _ = QFileDialog.getSaveFileName(self, "Save Output", "webfang_output.txt", "Text Files (*.txt)")
         if filename:
             try:
-                with open(filename, 'w') as f:
+                with open(filename, "w") as f:
                     f.write(self.output_area.toPlainText())
                 QMessageBox.information(self, "Saved", f"Output saved to {filename}")
             except Exception as e:
@@ -189,24 +174,12 @@ class WebFangGUI(QMainWindow):
     def play_scan_sound(self):
         self.fang_sound.play()
 
-    def handle_media_status(self, status):
-        if status == QMediaPlayer.EndOfMedia:
-            self.player.setPosition(0)
-            self.player.play()
-
-    def handle_video_loop(self, status):
-        if status == QMediaPlayer.EndOfMedia:
-            self.video_player.setPosition(0)
-            self.video_player.play()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet("""
         QMainWindow {
-            background-color: qlineargradient(
-                spread:pad, x1:0, y1:0, x2:1, y2:1,
-                stop:0 #0a0f1c, stop:1 #001d2e
-            );
+            background-color: black;
         }
         QWidget {
             background-color: transparent;
