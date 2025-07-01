@@ -12,9 +12,12 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANG3.png)
 
-![screenshot 4](WEBFANG%20Screenshots/webfang11.png)
-
 ![screenshot 5](WEBFANG%20Screenshots/screenshot4.png)
+
+![Built](https://img.shields.io/badge/Built%20For-Kali_Linux-8B0000?style=for-the-badge)
+![Language](https://img.shields.io/badge/Python-3.11-blue?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Live-green?style=plastic)
+![Creator](https://img.shields.io/badge/Made%20by-Talyx-purple?style=flat&logo=github)
 
 Features:
 -Web Spider
