@@ -20,7 +20,7 @@ class WebFangGUI(QMainWindow):
         # Full background logo
         self.bg_label = QLabel(self)
         self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
-        self.bg_label.setGeometry(0, 0, self.width(), self.height())
+        self.bg_label.setGeometry(200, 300, self.width(), self.height())
         self.bg_label.setScaledContents(True)
         self.bg_label.lower()
 
