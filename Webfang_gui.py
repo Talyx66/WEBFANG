@@ -14,7 +14,6 @@ class WebFangGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("WEBFANG")
-        self.matrix
         self.setGeometry(200, 200, 1000, 750)
 
         # Full background logo
