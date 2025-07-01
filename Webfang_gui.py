@@ -1,5 +1,3 @@
-
-
 import sys
 import subprocess
 import time
@@ -10,6 +8,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer, QUrl
 from PyQt5.QtGui import QFont, QTextCursor, QPixmap, QMovie
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
+from PyQt5.QtMultimediaWidgets import QVideoWidget  # <-- added
 
 class WebFangGUI(QMainWindow):
     def __init__(self):
@@ -17,32 +16,35 @@ class WebFangGUI(QMainWindow):
         self.setWindowTitle("WEBFANG")
         self.setGeometry(200, 200, 1000, 750)
 
-        # Full background logo
-        self.bg_label = QLabel(self)
-        self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
-        self.bg_label.setGeometry(200, 300, self.width(), self.height())
-        self.bg_label.setScaledContents(True)
-        self.bg_label.lower()
+        # Video background widget
+        self.video_widget = QVideoWidget(self)
+        self.video_widget.setGeometry(0, 0, self.width(), self.height())
+        self.video_widget.lower()  # Send to back
 
-        # Matrix rain animation full background
+        # Media player setup for video background
+        self.video_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        video_path = "Talyxlogo6.mp4"  # Your mp4 video file
+        self.video_player.setMedia(QMediaContent(QUrl.fromLocalFile(video_path)))
+        self.video_player.setVideoOutput(self.video_widget)
+        self.video_player.play()
+        self.video_player.mediaStatusChanged.connect(self.handle_video_loop)
+
+        # Matrix rain animation label (above video)
         self.matrix_label = QLabel(self)
         self.matrix_movie = QMovie("/home/silentadversary/WEBFANG/matri.gif")
         self.matrix_label.setMovie(self.matrix_movie)
         self.matrix_movie.setCacheMode(QMovie.CacheAll)
         self.matrix_movie.setSpeed(100)  # 100% speed
-    
         if self.matrix_movie.isValid():
             self.matrix_movie.start()
         else:
             print("Matrix GIF is invalid or not found.")
-
-        self.matrix_label.setStyleSheet("border: 2px solid red;")
         self.matrix_label.setGeometry(0, 0, self.width(), self.height())
-        self.matrix_label.show()
         self.matrix_label.setScaledContents(True)
-        self.matrix_label.lower()
-        self.matrix_label.stackUnder(self.bg_label)
+        self.matrix_label.lower()  # Below central widget but above video
+        self.matrix_label.stackUnder(self.video_widget)  # just to be safe
 
+        # Central widget (transparent background)
         self.central_widget = QWidget()
         self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 25);")
         self.setCentralWidget(self.central_widget)
@@ -55,7 +57,7 @@ class WebFangGUI(QMainWindow):
         logo_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(logo_label)
 
-        # Bat face image
+        # Bat face image with transparency
         bat_label = QLabel(self.central_widget)
         bat_pixmap = QPixmap("2749.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -115,7 +117,7 @@ class WebFangGUI(QMainWindow):
 
         self.central_widget.setLayout(main_layout)
 
-        # Background audio
+        # Background audio player (mp3)
         self.player = QMediaPlayer()
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
         self.player.setVolume(10)
@@ -128,8 +130,8 @@ class WebFangGUI(QMainWindow):
         self.fang_sound.setVolume(0.6)
 
     def resizeEvent(self, event):
-        self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
-        self.bg_label.setGeometry(0, 0, self.width(), self.height())
+        # Resize video widget and matrix label on window resize
+        self.video_widget.setGeometry(0, 0, self.width(), self.height())
         self.matrix_label.setGeometry(0, 0, self.width(), self.height())
         super().resizeEvent(event)
 
@@ -191,6 +193,11 @@ class WebFangGUI(QMainWindow):
         if status == QMediaPlayer.EndOfMedia:
             self.player.setPosition(0)
             self.player.play()
+
+    def handle_video_loop(self, status):
+        if status == QMediaPlayer.EndOfMedia:
+            self.video_player.setPosition(0)
+            self.video_player.play()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
