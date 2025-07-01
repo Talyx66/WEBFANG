@@ -24,6 +24,16 @@ class WebFangGUI(QMainWindow):
         self.bg_label.setScaledContents(True)
         self.bg_label.lower()
 
+        # Matrix rain animation full background
+        self.matrix_label = QLabel(self)
+        self.matrix_movie = QMovie("matri.gif")
+        self.matrix_label.setMovie(self.matrix_movie)
+        self.matrix_movie.start()
+        self.matrix_label.setGeometry(0, 0, self.width(), self.height())
+        self.matrix_label.setScaledContents(True)
+        self.matrix_label.lower()
+        self.matrix_label.stackUnder(self.bg_label)
+
         self.central_widget = QWidget()
         self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 25);")
         self.setCentralWidget(self.central_widget)
@@ -36,7 +46,7 @@ class WebFangGUI(QMainWindow):
         logo_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(logo_label)
 
-        # Bat face background (slightly transparent, below logo)
+        # Bat face image
         bat_label = QLabel(self.central_widget)
         bat_pixmap = QPixmap("2749.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
@@ -45,27 +55,6 @@ class WebFangGUI(QMainWindow):
         bat_label.setStyleSheet("opacity: 0.2;")
         bat_label.setAttribute(Qt.WA_TranslucentBackground)
         main_layout.insertWidget(1, bat_label)
-
-        # Matrix rain animations on left and right sides
-        left_matrix = QLabel(self.central_widget)
-        left_matrix_movie = QMovie("matx.gif")
-        left_matrix.setMovie(left_matrix_movie)
-        left_matrix_movie.start()
-        left_matrix.setGeometry(0, 0, 100, 750)
-        left_matrix.setAttribute(Qt.WA_TranslucentBackground)
-        left_matrix.setStyleSheet("background: transparent;")
-        left_matrix.setParent(self.central_widget)
-        left_matrix.raise_()
-
-        right_matrix = QLabel(self.central_widget)
-        right_matrix_movie = QMovie("matri.gif")
-        right_matrix.setMovie(right_matrix_movie)
-        right_matrix_movie.start()
-        right_matrix.setGeometry(900, 0, 100, 750)
-        right_matrix.setAttribute(Qt.WA_TranslucentBackground)
-        right_matrix.setStyleSheet("background: transparent;")
-        right_matrix.setParent(self.central_widget)
-        right_matrix.raise_()
 
         # Preset buttons for common actions
         preset_layout = QHBoxLayout()
@@ -103,7 +92,7 @@ class WebFangGUI(QMainWindow):
         self.output_area.setReadOnly(True)
         main_layout.addWidget(self.output_area)
 
-        # Footer with GitHub link (smaller)
+        # Footer with GitHub link
         footer = QLabel()
         footer.setText(
             'Made by Talyx  |  <span style="font-size:9pt;">'
@@ -117,14 +106,14 @@ class WebFangGUI(QMainWindow):
 
         self.central_widget.setLayout(main_layout)
 
-        # Ambient background loop audio
+        # Background audio
         self.player = QMediaPlayer()
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
         self.player.setVolume(10)
         self.player.play()
         self.player.mediaStatusChanged.connect(self.handle_media_status)
 
-        # Fang bite sound effect
+        # Scan sound effect
         self.fang_sound = QSoundEffect()
         self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
@@ -132,6 +121,7 @@ class WebFangGUI(QMainWindow):
     def resizeEvent(self, event):
         self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
         self.bg_label.setGeometry(0, 0, self.width(), self.height())
+        self.matrix_label.setGeometry(0, 0, self.width(), self.height())
         super().resizeEvent(event)
 
     def run_webfang(self):
@@ -225,7 +215,7 @@ if __name__ == "__main__":
             background-color: #223344;
         }
         QLineEdit, QTextEdit {
-            background-color: #111a28;
+            background-color: rgba(17, 26, 40, 160);
             border: 1px solid #00cfff;
             border-radius: 6px;
             padding: 8px;
