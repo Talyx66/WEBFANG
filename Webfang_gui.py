@@ -38,7 +38,7 @@ class WebFangGUI(QMainWindow):
         self.matrix_label.stackUnder(self.bg_label)
 
         self.central_widget = QWidget()
-        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 25);")
+        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 15);")
         self.setCentralWidget(self.central_widget)
 
         main_layout = QVBoxLayout()
