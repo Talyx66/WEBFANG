@@ -27,7 +27,7 @@ class WebFangGUI(QMainWindow):
         self.matrix_movie = QMovie("blue_matrix_rain.gif")
         self.matrix_label.setMovie(self.matrix_movie)
         self.matrix_movie.start()
-        self.matrix_label.setGeometry(0, 0, 300, 400)
+        self.matrix_label.setGeometry(0, 0, 120, 200)
         self.matrix_label.setScaledContents(True)
         self.matrix_label.lower()
         self.matrix_label.stackUnder(self.bg_label)
