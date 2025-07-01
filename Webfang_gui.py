@@ -25,7 +25,7 @@ class WebFangGUI(QMainWindow):
         self.bg_label.lower()
 
         self.central_widget = QWidget()
-        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 70);")
+        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 50);")
         self.setCentralWidget(self.central_widget)
 
         main_layout = QVBoxLayout()
