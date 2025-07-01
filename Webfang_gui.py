@@ -26,7 +26,7 @@ class WebFangGUI(QMainWindow):
 
         # Matrix rain animation full background
         self.matrix_label = QLabel(self)
-        self.matrix_movie = QMovie("/silentadversary/WEBFANG/matri.gif")
+        self.matrix_movie = QMovie("/home/silentadversary/WEBFANG/matri.gif")
         self.matrix_label.setMovie(self.matrix_movie)
         if self.matrix_movie.isValid():
             self.matrix_movie.start()
