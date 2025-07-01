@@ -1,4 +1,5 @@
 
+
 import sys
 import subprocess
 import time
@@ -16,7 +17,15 @@ class WebFangGUI(QMainWindow):
         self.setWindowTitle("WEBFANG")
         self.setGeometry(200, 200, 1000, 750)
 
+        # Full background logo
+        self.bg_label = QLabel(self)
+        self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
+        self.bg_label.setGeometry(0, 0, self.width(), self.height())
+        self.bg_label.setScaledContents(True)
+        self.bg_label.lower()
+
         self.central_widget = QWidget()
+        self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 180);")
         self.setCentralWidget(self.central_widget)
 
         main_layout = QVBoxLayout()
@@ -29,13 +38,13 @@ class WebFangGUI(QMainWindow):
 
         # Bat face background (slightly transparent, below logo)
         bat_label = QLabel(self.central_widget)
-        bat_pixmap = QPixmap("Talyxlogo.png")
+        bat_pixmap = QPixmap("2749.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         bat_label.setPixmap(bat_pixmap)
         bat_label.setAlignment(Qt.AlignCenter)
         bat_label.setStyleSheet("opacity: 0.2;")
         bat_label.setAttribute(Qt.WA_TranslucentBackground)
-        main_layout.insertWidget(1, bat_label)  # Insert below logo
+        main_layout.insertWidget(1, bat_label)
 
         # Matrix rain animations on left and right sides
         left_matrix = QLabel(self.central_widget)
@@ -119,6 +128,11 @@ class WebFangGUI(QMainWindow):
         self.fang_sound = QSoundEffect()
         self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
+
+    def resizeEvent(self, event):
+        self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
+        self.bg_label.setGeometry(0, 0, self.width(), self.height())
+        super().resizeEvent(event)
 
     def run_webfang(self):
         args = self.input_field.text().strip()
@@ -222,4 +236,3 @@ if __name__ == "__main__":
     window = WebFangGUI()
     window.show()
     sys.exit(app.exec_())
-
