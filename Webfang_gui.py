@@ -28,7 +28,12 @@ class WebFangGUI(QMainWindow):
         self.matrix_label = QLabel(self)
         self.matrix_movie = QMovie("matri.gif")
         self.matrix_label.setMovie(self.matrix_movie)
-        self.matrix_movie.start()
+        if self.matrix_movie.isValid():
+    self.matrix_movie.start()
+else:
+    print("Matrix GIF is invalid or not found.")
+
+        self.matrix_label.setStyleSheet("border: 2px solid red;")
         self.matrix_label.setGeometry(0, 0, self.width(), self.height())
         self.matrix_label.setScaledContents(True)
         self.matrix_label.lower()
