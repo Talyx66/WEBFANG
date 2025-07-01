@@ -28,6 +28,9 @@ class WebFangGUI(QMainWindow):
         self.matrix_label = QLabel(self)
         self.matrix_movie = QMovie("/home/silentadversary/WEBFANG/matri.gif")
         self.matrix_label.setMovie(self.matrix_movie)
+        self.matrix_movie.setCacheMode(QMovie.CacheAll)
+        self.matrix_movie.setSpeed(100)  # 100% speed
+    
         if self.matrix_movie.isValid():
             self.matrix_movie.start()
         else:
@@ -35,6 +38,7 @@ class WebFangGUI(QMainWindow):
 
         self.matrix_label.setStyleSheet("border: 2px solid red;")
         self.matrix_label.setGeometry(0, 0, self.width(), self.height())
+        self.matrix_label.show()
         self.matrix_label.setScaledContents(True)
         self.matrix_label.lower()
         self.matrix_label.stackUnder(self.bg_label)
