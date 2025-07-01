@@ -1,18 +1,20 @@
 import sys
 import subprocess
 import time
-from PyQt5.QtWidgets import (
+from PyQt5.QtWidgets import ( 
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QPushButton, QTextEdit, QLineEdit, QLabel, QFileDialog, QMessageBox
 )
 from PyQt5.QtCore import Qt, QTimer, QUrl
 from PyQt5.QtGui import QFont, QTextCursor, QPixmap, QMovie
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
+from PyQt5.QtWidgets import QGraphicsOpacityEffect
 
 class WebFangGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("WEBFANG")
+        self.matrix
         self.setGeometry(200, 200, 1000, 750)
 
         # Full background logo
@@ -24,6 +26,10 @@ class WebFangGUI(QMainWindow):
 
         # Matrix rain animation full background
         self.matrix_label = QLabel(self)
+        opacity_effect = QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(0.2)  # Adjust transparency here
+        self.matrix_label.setGraphicsEffect(opacity_effect)
+
         self.matrix_movie = QMovie("blue_matrix_rain.gif")
         self.matrix_label.setMovie(self.matrix_movie)
         self.matrix_movie.start()
