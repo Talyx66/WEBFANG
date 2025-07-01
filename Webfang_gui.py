@@ -23,7 +23,7 @@ class WebFangGUI(QMainWindow):
 
         # Media player setup for video background
         self.video_player = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        video_path = "Talyxlogo6.mp4"  # Your mp4 video file
+        video_path = "/home/silentadversary/WEBFANG/Talyxlogo6.mp4"  # Your mp4 video file
         self.video_player.setMedia(QMediaContent(QUrl.fromLocalFile(video_path)))
         self.video_player.setVideoOutput(self.video_widget)
         self.video_player.play()
