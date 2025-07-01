@@ -29,7 +29,7 @@ class WebFangGUI(QMainWindow):
 
         # Bat face background (slightly transparent, below logo)
         bat_label = QLabel(self.central_widget)
-        bat_pixmap = QPixmap("2749.png")
+        bat_pixmap = QPixmap("Talyxlogo.png")
         bat_pixmap = bat_pixmap.scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         bat_label.setPixmap(bat_pixmap)
         bat_label.setAlignment(Qt.AlignCenter)
