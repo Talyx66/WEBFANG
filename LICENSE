@@ -2,45 +2,43 @@ Proprietary License
 
 Copyright (c) 2025 Talyx66
 
-WEBFANG Software License Agreement (Proprietary License)
+WEBFANG Software License Agreement (Proprietary License)  
 Version 1.0 – July 2025
 
-This Software License Agreement ("Agreement") governs the use of the WEBFANG software and any associated files, data, or documentation (collectively, the "Software"), developed and owned by Talyx66 ("Licensor"). By downloading, installing, copying, or using the Software, you ("Licensee") agree to be bound by the terms of this Agreement.
+This Software License Agreement ("Agreement") governs the use of the WEBFANG software and all associated files, data, and documentation (collectively, the "Software"), developed and owned by Talyx66 ("Licensor"). By downloading, forking, copying, or using the Software, you ("Licensee") agree to the following terms:
 
-1. Grant of License
-Licensor hereby grants Licensee a limited, non-transferable, non-sublicensable, non-exclusive, revocable license to use the Software for personal, non-commercial, and internal use only. All rights not expressly granted remain reserved by the Licensor.
+1. Grant of License  
+Licensor grants Licensee a limited, non-transferable, non-sublicensable, non-exclusive, revocable license to use and fork the Software **solely for personal, non-commercial, and internal purposes**. Forking for private or personal access is allowed; **modification or derivative works are strictly prohibited**. All rights not explicitly granted remain with the Licensor.
 
-2. Restrictions
-Licensee shall not, directly or indirectly:
-- Copy, modify, reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code of the Software.
-- Distribute, sublicense, lease, rent, loan, or sell the Software or any portion thereof.
-- Use the Software for any commercial, military, or governmental purpose without express written permission from the Licensor.
-- Remove, obscure, or alter any proprietary notices or labels on the Software.
+2. Restrictions  
+Licensee shall not:
+- Modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works from the Software.
+- Use the Software for any commercial, governmental, or military purpose without explicit written permission from the Licensor.
+- Sell, license, lease, rent, or redistribute the Software, in whole or in part.
+- Remove or alter any proprietary notices or licensing terms.
 
-3. Ownership
-The Software is licensed, not sold. Licensor retains all right, title, and interest, including intellectual property rights, in and to the Software and all associated materials.
+3. Ownership  
+This Software is licensed, not sold. The Licensor retains all title, ownership, and intellectual property rights in and to the Software and related materials.
 
-4. No Warranty
-The Software is provided "as is", without warranty of any kind, express or implied. The Licensor does not warrant that the Software will be error-free or operate without interruption.
+4. No Warranty  
+The Software is provided “as is” without warranties of any kind, express or implied. The Licensor does not guarantee that the Software will be error-free or function without interruption.
 
-5. Limitation of Liability
-In no event shall the Licensor be liable for any damages (including, without limitation, lost profits, data loss, business interruption, or personal injury) arising out of the use or inability to use the Software, even if advised of the possibility of such damages.
+5. Limitation of Liability  
+Under no circumstances shall the Licensor be liable for any direct, indirect, incidental, or consequential damages arising from the use or misuse of the Software.
 
-6. Termination
-This license is effective until terminated. It will terminate automatically without notice if Licensee breaches any term of this Agreement. Upon termination, the Licensee must destroy all copies of the Software.
+6. Termination  
+This license terminates automatically if any term of this Agreement is violated. Upon termination, the Licensee must delete all copies and forks of the Software.
 
-7. Governing Law
-This Agreement shall be governed by and construed in accordance with the laws of the State of Florida, United States, without regard to conflict of law principles.
+7. Governing Law  
+This Agreement shall be governed by the laws of the State of Florida, United States, without regard to conflict of law rules.
 
-8. Non-Transferability
-Licensee may not assign or transfer this Agreement or any rights or obligations under it without prior written consent from Licensor.
+8. Non-Transferability  
+The Licensee may not assign, sublicense, or otherwise transfer this Agreement or its rights without the prior written consent of the Licensor.
 
-9. Confidentiality
-Licensee agrees not to disclose, share, or publish any part of the Software's source, structure, design, or logic unless expressly authorized by the Licensor.
+9. Confidentiality  
+Licensee agrees not to share, disclose, or publish the Software’s source code, design, logic, or structure publicly, even in forks or mirrors, without explicit written permission.
 
-10. Contact
-For permissions, licensing inquiries, or violations, contact:
-Talyx66
-https://github.com/Talyx66
-
-© 2025 Talyx66. All rights reserved.
+10. Contact  
+For permissions, violations, or legal inquiries, contact:  
+Talyx66  
+https://github.com/Talyx66 © 2025 Talyx66. All rights reserved.
