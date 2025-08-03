@@ -8,8 +8,6 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 
 ![screenshot 1](WEBFANG%20Screenshots/WEBFANG1.png)
 
-![screenshot 2](WEBFANG%20Screenshots/WEBFANG2.png)
-
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANG3.png)
 
 ![screenshot 5](WEBFANG%20Screenshots/screenshot4.png)
