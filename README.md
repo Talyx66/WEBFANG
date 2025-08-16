@@ -1,4 +1,4 @@
-# WEBFANG (UPDATES COMING)
+# WEBFANG (UPDATES COMING SOON)
 This is my very first Command-line interface tool I have developed, engineered for blue-teamers, red-teamers, bug hunters, or for research & study purposes, use legally and ethically.
 
 **Open "webfang_gui.py" for graphical user interface mode**
