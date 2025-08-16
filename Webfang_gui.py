@@ -10,7 +10,7 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QSoundEffect
 from PyQt5.QtWidgets import QGraphicsOpacityEffect
 from concurrent.futures import ThreadPoolExecutor
 
-# Import your modules
+# Import your existing modules
 from modules import dnsdumpster, headers, shodan_lookup, spider, urlscan, whois_lookup
 
 class WebFangGUI(QMainWindow):
@@ -19,14 +19,13 @@ class WebFangGUI(QMainWindow):
         self.setWindowTitle("WEBFANG")
         self.setGeometry(200, 200, 1000, 750)
 
-        # Full background logo
+        # === ORIGINAL BACKGROUND & MATRIX ===
         self.bg_label = QLabel(self)
         self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
         self.bg_label.setGeometry(200, 300, self.width(), self.height())
         self.bg_label.setScaledContents(True)
         self.bg_label.lower()
 
-        # Matrix rain animation full background
         self.matrix_label = QLabel(self)
         opacity_effect = QGraphicsOpacityEffect()
         opacity_effect.setOpacity(0.2)
@@ -39,19 +38,20 @@ class WebFangGUI(QMainWindow):
         self.matrix_label.lower()
         self.matrix_label.stackUnder(self.bg_label)
 
+        # Central widget
         self.central_widget = QWidget()
         self.central_widget.setStyleSheet("background-color: rgba(0, 0, 0, 15);")
         self.setCentralWidget(self.central_widget)
 
         main_layout = QVBoxLayout()
 
-        # Neon glowing text logo (top center)
+        # Neon text logo
         logo_label = QLabel("WEBFANG")
         logo_label.setObjectName("logoLabel")
         logo_label.setAlignment(Qt.AlignCenter)
         main_layout.addWidget(logo_label)
 
-        # Bat face image
+        # Bat logo
         bat_label = QLabel(self.central_widget)
         bat_pixmap = QPixmap("2749.png").scaled(300, 300, Qt.KeepAspectRatio, Qt.SmoothTransformation)
         bat_label.setPixmap(bat_pixmap)
@@ -60,7 +60,7 @@ class WebFangGUI(QMainWindow):
         bat_label.setAttribute(Qt.WA_TranslucentBackground)
         main_layout.insertWidget(1, bat_label)
 
-        # Preset buttons
+        # === PRESET BUTTONS ===
         preset_layout = QHBoxLayout()
         buttons = {
             "Scan URL": self.run_url_scan,
@@ -78,7 +78,7 @@ class WebFangGUI(QMainWindow):
             preset_layout.addWidget(btn)
         main_layout.addLayout(preset_layout)
 
-        # Input + Run + Save buttons
+        # Input + Save
         input_layout = QHBoxLayout()
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Enter target, e.g., example.com")
@@ -87,10 +87,9 @@ class WebFangGUI(QMainWindow):
         self.save_button = QPushButton("Save Output")
         self.save_button.clicked.connect(self.save_output)
         input_layout.addWidget(self.save_button)
-
         main_layout.addLayout(input_layout)
 
-        # Output area
+        # Output
         self.output_area = QTextEdit()
         self.output_area.setReadOnly(True)
         main_layout.addWidget(self.output_area)
@@ -104,24 +103,25 @@ class WebFangGUI(QMainWindow):
 
         self.central_widget.setLayout(main_layout)
 
-        # Background audio
+        # Audio
         self.player = QMediaPlayer()
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile("matx.mp3")))
         self.player.setVolume(10)
         self.player.play()
         self.player.mediaStatusChanged.connect(self.handle_media_status)
 
-        # Scan sound
         self.fang_sound = QSoundEffect()
         self.fang_sound.setSource(QUrl.fromLocalFile("fang.wav"))
         self.fang_sound.setVolume(0.6)
 
+    # === RESIZE EVENT ===
     def resizeEvent(self, event):
         self.bg_label.setPixmap(QPixmap("Talyxlogo.png").scaled(self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation))
         self.bg_label.setGeometry(0, 0, self.width(), self.height())
         self.matrix_label.setGeometry(0, 0, self.width(), self.height())
         super().resizeEvent(event)
 
+    # === OUTPUT HELPERS ===
     def animate_output(self, text):
         self.output_area.moveCursor(QTextCursor.End)
         for line in text if isinstance(text, list) else [text]:
@@ -142,6 +142,7 @@ class WebFangGUI(QMainWindow):
         self.output_area.setTextBackgroundColor(Qt.transparent)
         self.output_area.append(f"<span style='color:{color}'>{line}</span>")
 
+    # === SAVE OUTPUT ===
     def save_output(self):
         filename, _ = QFileDialog.getSaveFileName(self, "Save Output", "webfang_output.txt", "Text Files (*.txt)")
         if filename:
@@ -152,6 +153,7 @@ class WebFangGUI(QMainWindow):
             except Exception as e:
                 QMessageBox.warning(self, "Error", f"Failed to save: {e}")
 
+    # === AUDIO ===
     def play_scan_sound(self):
         self.fang_sound.play()
 
@@ -160,7 +162,7 @@ class WebFangGUI(QMainWindow):
             self.player.setPosition(0)
             self.player.play()
 
-    # ===== Module runners =====
+    # === MODULE RUNNERS ===
     def run_url_scan(self):
         target = self.input_field.text().strip()
         if target:
@@ -221,6 +223,44 @@ class WebFangGUI(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyleSheet("""
+        QMainWindow {
+            background-color: qlineargradient(
+                spread:pad, x1:0, y1:0, x2:1, y2:1,
+                stop:0 #0a0f1c, stop:1 #001d2e
+            );
+        }
+        QWidget {
+            background-color: transparent;
+            color: #eeeeee;
+            font-family: Consolas, monospace;
+            font-size: 12pt;
+        }
+        QLabel#logoLabel {
+            color: #00cfff;
+            font-size: 54pt;
+            font-weight: bold;
+            font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
+        }
+        QPushButton {
+            background-color: #112233;
+            border: 1px solid #00cfff;
+            padding: 12px;
+            border-radius: 8px;
+            color: #00cfff;
+        }
+        QPushButton:hover {
+            background-color: #223344;
+        }
+        QLineEdit, QTextEdit {
+            background-color: rgba(17, 26, 40, 160);
+            border: 1px solid #00cfff;
+            border-radius: 6px;
+            padding: 8px;
+            color: #eeeeee;
+            font-size: 11pt;
+        }
+    """)
     window = WebFangGUI()
     window.show()
     sys.exit(app.exec_())
