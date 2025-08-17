@@ -1,38 +1,27 @@
 import requests
-from bs4 import BeautifulSoup
+from concurrent.futures import ThreadPoolExecutor
 
-def run(target):
-    print(f"[*] Running DNSDumpster on {target}")
+COMMON_SUBDOMAINS = [
+    'www','mail','ftp','dev','api','ns1','ns2','admin','portal','beta','shop','blog','secure'
+]
 
-    session = requests.Session()
-    url = "https://dnsdumpster.com/"
+def probe_subdomain(sub, target):
+    fqdn = f"{sub}.{target}"
     try:
-        # Get CSRF token
-        resp = session.get(url)
-        soup = BeautifulSoup(resp.text, "html.parser")
-        csrf = soup.find("input", {"name": "csrfmiddlewaretoken"})["value"]
+        r = requests.get(f"http://{fqdn}", timeout=2)
+        return f"[+] {fqdn} reachable"
+    except:
+        return f"[-] {fqdn} not reachable"
 
-        # Post target domain
-        headers = {
-            "Referer": url,
-            "User-Agent": "Mozilla/5.0"
-        }
-        data = {
-            "csrfmiddlewaretoken": csrf,
-            "targetip": target
-        }
-        resp = session.post(url, headers=headers, data=data)
-
-        # Parse results
-        soup = BeautifulSoup(resp.text, "html.parser")
-        tables = soup.find_all("table")
-        if not tables:
-            print("[!] No results found or scraping blocked.")
-            return
-
-        # Example: print the first table text
-        print("[*] DNSDumpster Results:")
-        print(tables[0].get_text(separator="\n"))
-
+def dns_bruteforce(target):
+    output = []
+    if not target:
+        return ["[!] No target provided."]
+    output.append(f"[*] Running advanced DNS brute-force on {target}")
+    try:
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            results = executor.map(lambda sub: probe_subdomain(sub, target), COMMON_SUBDOMAINS)
+        output.extend(results)
     except Exception as e:
-        print(f"[!] DNSDumpster lookup failed: {e}")
+        output.append(f"[!] DNS brute-force failed: {e}")
+    return output
