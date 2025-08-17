@@ -27,7 +27,7 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 -Header fingerprinting
 -Modular and extensible
 
-## Usage:
+## Main.py Usage:
 ```bash
 python3 webfang.py --target example.com --spider --dns --whois --headers --shodan
 ```
@@ -38,6 +38,7 @@ git clone https://github.com/Talyx66/WEBFANG.git
 cd WebFang
 chmod +x setup.sh
 ./setup.sh
+pip install -r requirements
 ```
 
 ## Disclaimer: 
