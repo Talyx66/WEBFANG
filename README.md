@@ -1,3 +1,4 @@
+![screenshot 1](WEBFANG%20Screenshots/Webfang.png)
 # WEBFANG
 This is my very first Command-line interface tool I have developed, engineered for blue-teamers, red-teamers, bug hunters, or for research & study purposes, use legally and ethically.
 ### Recent Updates:
@@ -11,9 +12,7 @@ threaded execution simulation, run All executes all scans concurrently, Advanced
 **WebFang** is an OSINT + Reconnaissance toolkit for ethical hackers and red teamers.
 It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting.
 
-
-
-![screenshot 5](WEBFANG%20Screenshots/screenshot4.png)
+![screenshot 2](WEBFANG%20Screenshots/screenshot4.png)
 
 ![Built](https://img.shields.io/badge/Built%20For-Kali_Linux-8B0000?style=for-the-badge)
 ![Language](https://img.shields.io/badge/Python-3.11-blue?style=flat-square)
