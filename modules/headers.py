@@ -1,6 +1,6 @@
 import requests
 
-def run(target):
+def scan(target):
     print(f"[*] Running headers lookup on {target}")
     try:
         # Ensure URL scheme
