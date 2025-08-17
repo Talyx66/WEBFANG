@@ -1,40 +1,28 @@
 import shodan
+import socket
 
-# Insert your Shodan API key here
 API_KEY = "YOUR_SHODAN_API_KEY"
 
-def shodan_lookup(target: str):
-    """
-    Perform a Shodan lookup on the given target (IP/host).
-    Returns structured results or error message.
-    """
-    print(f"[*] Running Shodan lookup on {target}...")
-
+def shodan_lookup(target):
+    output = []
+    if not target:
+        return ["[!] No target provided."]
+    output.append(f"[*] Running Shodan lookup on {target}")
     try:
         api = shodan.Shodan(API_KEY)
-        results = api.host(target)
-
-        output = []
-        output.append(f"IP: {results.get('ip_str', 'N/A')}")
-        output.append(f"Organization: {results.get('org', 'N/A')}")
-        output.append(f"Operating System: {results.get('os', 'N/A')}")
-        output.append("Ports:")
-
+        ip = socket.gethostbyname(target)
+        results = api.host(ip)
+        output.append(f"[+] IP: {results.get('ip_str', 'N/A')}")
+        output.append(f"[+] Organization: {results.get('org', 'N/A')}")
+        output.append(f"[+] OS: {results.get('os', 'N/A')}")
+        output.append(f"[+] Hostnames: {results.get('hostnames')}")
+        output.append("Open Ports and Services:")
         for item in results.get('data', []):
-            port = item.get('port')
-            product = item.get('product') or "Unknown Service"
-            output.append(f" - {port}: {product}")
-
-        return "\n".join(output)
-
+            output.append(f" - Port {item.get('port')}: {item.get('product', 'N/A')} ({item.get('transport')})")
+            if item.get('ssl', None):
+                output.append(f"   SSL: {item['ssl'].get('versions', 'N/A')}")
     except shodan.APIError as e:
-        return f"[!] Shodan API error: {e}"
+        output.append(f"[!] Shodan API error: {e}")
     except Exception as e:
-        return f"[!] Shodan lookup failed: {e}"
-
-
-if __name__ == "__main__":
-    # Example standalone usage
-    target_ip = "8.8.8.8"  # Replace with any IP for testing
-    print(shodan_lookup(target_ip))
-
+        output.append(f"[!] Shodan lookup failed: {e}")
+    return output
