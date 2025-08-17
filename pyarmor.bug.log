@@ -1,0 +1,12 @@
+[BUG]: no found input "WEBFANG"
+
+## Command Line
+/home/silentadversary/.local/bin/pyarmor gen --recursive ./WEBFANG
+
+## Environments
+Python 3.13.5
+Pyarmor 9.1.8 (trial), 000000, non-profits
+Platform linux.x86_64
+Native linux.x86_64
+Home /home/silentadversary/.pyarmor
+
