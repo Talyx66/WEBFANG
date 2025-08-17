@@ -1,30 +1,26 @@
 import whois
+import socket
+import datetime
 
 def run(target):
     output = []
+    if not target:
+        return ["[!] No target provided."]
     output.append(f"[*] Running WHOIS lookup on {target}")
-
     try:
         w = whois.whois(target)
-
-        # Check if we got any data
-        if not w or w.status is None:
-            output.append("[-] No WHOIS data found.")
-            return output
-
-        # Iterate over key/value pairs
         for key, value in w.items():
-            try:
-                if value:
-                    # Handle lists cleanly
-                    val_str = ', '.join(value) if isinstance(value, list) else str(value)
-                    output.append(f"[+] {key}: {val_str}")
-                else:
-                    output.append(f"[-] {key}: No data")
-            except Exception as e:
-                output.append(f"[!] Error reading {key}: {e}")
-
+            if isinstance(value, list):
+                output.append(f"{key}: {', '.join(map(str, value))}")
+            else:
+                output.append(f"{key}: {value}")
+        # Extra info
+        try:
+            ip = socket.gethostbyname(target)
+            output.append(f"[+] Resolved IP: {ip}")
+        except:
+            output.append(f"[-] Could not resolve IP")
+        output.append(f"[+] Lookup timestamp: {datetime.datetime.now()}")
     except Exception as e:
         output.append(f"[!] WHOIS lookup failed: {e}")
-
     return output
