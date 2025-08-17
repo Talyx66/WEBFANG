@@ -1,5 +1,9 @@
-# WEBFANG (UPDATES COMING SOON)
+# WEBFANG
 This is my very first Command-line interface tool I have developed, engineered for blue-teamers, red-teamers, bug hunters, or for research & study purposes, use legally and ethically.
+### Recent Updates:
+```
+threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements, Obfuscation security implemented)
+```
 
 **Open "webfang_gui.py" for graphical user interface mode**
   
@@ -17,7 +21,7 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 
 ## Features:
 -Web Spider
--DNS & WHOIS Lookup
+-DNS Bruteforce & WHOIS Lookup
 -Shodan & URLScan Integration  (Get your API key from Shodan.io)
 -Header fingerprinting
 -Modular and extensible
