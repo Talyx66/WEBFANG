@@ -13,7 +13,7 @@
 ![screenshot 2](WEBFANG%20Screenshots/screenshot4.png)
 
 # WEBFANG
-This is my very first Command-line interface tool I have developed, engineered for blue-teamers, red-teamers, bug hunters, or for research & study purposes, use legally and ethically.
+This is my very first Command-line interface tool I have developed & engineered for blue-teamers, red-teamers, & bug hunters. Use legally and ethically.
 
 
 ### Recent Updates:
