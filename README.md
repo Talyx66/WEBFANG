@@ -5,19 +5,15 @@
 ![Status](https://img.shields.io/badge/Status-Live-green?style=plastic)
 ![Creator](https://img.shields.io/badge/Made%20by-Talyx-purple?style=flat&logo=github)
 
-# WEBFANG
+# WEBFANG 
 
 ## Disclaimer: 
-
- *Webfang is a Reconnaissance toolkit for ethical hackers and red teamers. It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting. WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before use*
+ *Webfang is my first Command-line interface tool developed and engineered as a Reconnaissance toolkit for ethical hackers and red teamers. It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting. WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before use*
 
 ## Preview:
 ![screenshot 2](WEBFANG%20Screenshots/Webfang4.png)
-
+## Live Preview:
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANGpreview.gif)
-# WEBFANG
-This is my very first Command-line interface tool I have developed & engineered for blue-teamers, red-teamers, & bug hunters. Use legally and ethically.
-
 
 ### Recent Updates: 08/17/25
 ```
