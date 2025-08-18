@@ -1,5 +1,9 @@
 requests
 shodan
-dnspython
 beautifulsoup4
 python-whois
+dnspython>=2.4.2
+shodan>=1.30.0
+colorama>=0.4.6
+tqdm>=4.65.0
+argparse>=1.4.0
