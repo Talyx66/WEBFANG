@@ -21,12 +21,6 @@ This is my very first Command-line interface tool I have developed & engineered 
 threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements, Obfuscation security implemented)
 ```
 
-
-**Open "webfang_gui.py" for graphical user interface mode**
-  
-**WebFang** is an OSINT + Reconnaissance toolkit for ethical hackers and red teamers.
-It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting.
-
 ## Features:
 -Web Spider
 -DNS Bruteforce & WHOIS Lookup
@@ -34,22 +28,16 @@ It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and he
 -Header fingerprinting
 -Modular and extensible
 
-## Main.py Usage:
-```bash
-python3 webfang.py --target example.com --spider --dns --whois --headers --shodan
-```
+**Open "webfang_gui.py" for graphical user interface mode**
 
 ## Setup:
-```bash
+```
 git clone https://github.com/Talyx66/WEBFANG.git
 cd WebFang
 chmod +x setup.sh
 ./setup.sh
 pip install -r requirements
 ```
-
-## Disclaimer: 
-WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before use.
 
 ## Engineered & Developed by: 
 Talyx  https://Github.com/Talyx66
