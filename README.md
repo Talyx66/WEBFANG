@@ -8,7 +8,7 @@
 ## Disclaimer: 
 
  *Webfang is a Reconnaissance toolkit for ethical hackers and red teamers. It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting. WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before use*
----
+
 
 ![screenshot 2](WEBFANG%20Screenshots/screenshot4.png)
 
