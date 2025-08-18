@@ -16,7 +16,7 @@
 This is my very first Command-line interface tool I have developed & engineered for blue-teamers, red-teamers, & bug hunters. Use legally and ethically.
 
 
-### Recent Updates: 8/25
+### Recent Updates: 08/17/25
 ```
 threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements, Obfuscation security implemented)
 ```
