@@ -5,6 +5,8 @@
 ![Status](https://img.shields.io/badge/Status-Live-green?style=plastic)
 ![Creator](https://img.shields.io/badge/Made%20by-Talyx-purple?style=flat&logo=github)
 
+# WEBFANG
+
 ## Disclaimer: 
 
  *Webfang is a Reconnaissance toolkit for ethical hackers and red teamers. It performs passive and active recon using spidering, WHOIS, DNS, Shodan, and header fingerprinting. WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before use*
