@@ -12,6 +12,7 @@
 ## Preview:
 ![screenshot 2](WEBFANG%20Screenshots/screenshot4.png)
 
+![screenshot 3](WEBFANG%20Screenshots/WEBFANGpreview.gif)
 # WEBFANG
 This is my very first Command-line interface tool I have developed & engineered for blue-teamers, red-teamers, & bug hunters. Use legally and ethically.
 
