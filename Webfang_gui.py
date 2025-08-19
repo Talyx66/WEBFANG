@@ -191,7 +191,7 @@ class WebFangGUI(QMainWindow):
         target = self.input_field.text().strip()
         if target:
             self.play_scan_sound()
-            self.animate_output(shodan_lookup.shodan_lookup(target))
+            self.animate_output(shodan_lookup.(target))
 
     def run_whois(self):
         target = self.input_field.text().strip()
@@ -264,3 +264,4 @@ if __name__ == "__main__":
     window = WebFangGUI()
     window.show()
     sys.exit(app.exec_())
+
