@@ -19,7 +19,7 @@
 ```
 threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements,)
 ```
-
+---
 ## Features:
 -Web Spider
 -DNS Bruteforce & WHOIS Lookup
