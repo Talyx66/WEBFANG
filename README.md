@@ -17,7 +17,7 @@
 
 ### Recent Updates: 08/17/25
 ```
-threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements, Obfuscation security implemented)
+threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements,)
 ```
 
 ## Features:
