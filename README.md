@@ -36,6 +36,8 @@ cd WebFang
 chmod +x setup.sh
 ./setup.sh
 pip install -r requirements
+cd WEBFANG
+Python3 Webfang_gui.py
 ```
 
 ## Engineered & Developed by: 
