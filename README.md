@@ -7,6 +7,7 @@
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
 ![OS](https://img.shields.io/badge/OS-Kali_Linux%20%7C%20Ubuntu%20%7C%20Windows-blue?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-2.0-8B0000?style=flat-square)
+![Modules](https://img.shields.io/badge/Modules-6-yellow?style=flat-square)
 
 # WEBFANG v2.0
 
