@@ -40,7 +40,11 @@ pip install -r requirements
 cd WEBFANG
 Python3 Webfang_gui.py
 ```
-
+## workflow coming soon
+```
+python3 orchestrator.py --workflow workflows/full_attack_chain.yaml --target example.com
+```
+---
 ## Engineered & Developed by: 
 Talyx  https://Github.com/Talyx66
 ---                                                                                                                                                             
