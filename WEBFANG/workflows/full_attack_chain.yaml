@@ -1,0 +1,36 @@
+workflow: Full_Attack_Chain
+description: >
+  Automated reconnaissance pipeline using existing WebFang modules.
+steps:
+  - name: Shodan_Lookup
+    module: shodan_lookup
+    function: shodan_lookup
+    input:
+      target: ${TARGET}
+
+  - name: DNS_Enumeration
+    module: dnsdumpster
+    function: run_dnsdumpster
+    depends_on: Shodan_Lookup
+
+  - name: HTTP_Headers
+    module: headers
+    function: fetch_headers
+    depends_on: DNS_Enumeration
+
+  - name: Spider
+    module: spider
+    function: run_spider
+    depends_on: HTTP_Headers
+    params:
+      depth: 2
+
+  - name: URLScan
+    module: urlscan
+    function: scan_url
+    depends_on: Spider
+
+  - name: Whois_Lookup
+    module: whois_lookup
+    function: run_whois
+    depends_on: URLScan
