@@ -5,7 +5,6 @@
 ![Status](https://img.shields.io/badge/Status-Live-green?style=plastic)
 ![Creator](https://img.shields.io/badge/Made%20by-Talyx-purple?style=flat&logo=github)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
-![Obfuscated](https://img.shields.io/badge/Obfuscation-Enabled-black?style=flat-square)
 ![OS](https://img.shields.io/badge/OS-Kali_Linux%20%7C%20Ubuntu%20%7C%20Windows-blue?style=flat-square)
 
 # WEBFANG v2.0
