@@ -33,7 +33,7 @@ threaded execution simulation, run All executes all scans concurrently, Advanced
 
 **Open "webfang_gui.py" for graphical user interface mode**
 
-**Add Shodan API for module usage** (Shodan module error is currently being fixed)
+**Add Shodan API for module usage** (Shodan module error is currently being worked on)
 ## Setup:
 ```
 git clone https://github.com/Talyx66/WEBFANG.git
