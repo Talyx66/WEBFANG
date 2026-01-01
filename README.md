@@ -24,6 +24,11 @@
 threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements,)
 ```
 ---
+### Upcoming updates: 
+```
+stop/pause scan, Shodan API usage fix, clock/timer/etc, clear results, Resizable panes & column sorting
+```
+---
 ## Features:
 -Web Spider
 -DNS Bruteforce & WHOIS Lookup
