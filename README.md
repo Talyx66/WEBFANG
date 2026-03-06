@@ -15,7 +15,7 @@
  *Webfang is a  CLI developed and engineered as a Reconnaissance toolkit for ethical hackers, blue teamers, and red teamers. It performs passive and active reconnaissance using spidering, Subdomain Scanning, WHOIS, DNS, Shodan, and header fingerprinting. WEBFANG is intended exclusively for authorized penetration testing, OSINT research, and ethical hacking ONLY. Unauthorized use is illegal. The creator holds no responsibility for misuse. Always obtain proper permission before. ® All Rights Reserved*
 
 ## Preview:
-![screenshot 2](WEBFANG%20Screenshots/Webfang4.pn)
+![screenshot 2](WEBFANG%20Screenshots/Webfang4.png)
 ## Live Preview:
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANGpreview.gif)
 
