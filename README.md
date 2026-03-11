@@ -42,16 +42,10 @@ stop/pause scan, Shodan API usage fix, clock/timer/etc, clear results, Resizable
 ## Setup:
 ```
 git clone https://github.com/Talyx66/WEBFANG.git
-cd WebFang
-chmod +x setup.sh
-./setup.sh
-pip install -r requirements
 cd WEBFANG
+pip install -r requirements
+cd gui
 Python3 Webfang_gui.py
-```
-## workflow coming soon
-```
-python3 orchestrator.py --workflow workflows/full_attack_chain.yaml --target example.com
 ```
 ---
 ## Engineered & Developed by: 
