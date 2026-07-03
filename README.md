@@ -19,7 +19,7 @@
 ## Live Preview:
 ![screenshot 3](WEBFANG%20Screenshots/WEBFANGpreview.gif)
 
-### Recent Updates: 08/17/25 - 08/19/25
+### Recent Updates: 08/17/25 - New Updates coming soon: 08/26
 ```
 threaded execution simulation, run All executes all scans concurrently, Advanced OSINT functions, Save output, Timestamp, Output enhancements,)
 ```
